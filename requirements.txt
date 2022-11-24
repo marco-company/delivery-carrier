@@ -2,3 +2,4 @@
 roulier
 unidecode
 zeep
+cerberus
