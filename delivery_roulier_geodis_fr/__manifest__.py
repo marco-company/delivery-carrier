@@ -5,7 +5,7 @@
     "version": "16.0.1.0.0",
     "author": "Akretion, Odoo Community Association (OCA)",
     "summary": "Generate Label for Geodis logistic",
-    "maintainer": "Akretion, Odoo Community Association (OCA)",
+    "maintainers": ["florian-dacosta"],
     "category": "Warehouse",
     "depends": [
         "delivery_roulier",

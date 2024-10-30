@@ -28,6 +28,8 @@ class GeodisFrLabelCase(VCRMixin, carrier_label_case.TestCarrierLabel):
                 "geodis_fr_customer_id": "787000",
             }
         )
+        carrier = self.env.ref("delivery_roulier_geodis_fr.delivery_carrier_mes")
+        carrier.carrier_account_id = self.account.id
         self.agency = self.env["delivery.carrier.agency"].create(
             {
                 "name": "Lille Agency",
@@ -61,6 +63,13 @@ class GeodisFrLabelCase(VCRMixin, carrier_label_case.TestCarrierLabel):
             "before_record_request": self._hide_sensitive_data,
         }
 
+    def _transfer_order_picking(self):
+        for move in self.picking.move_ids:
+            move.quantity_done = move.product_uom_qty
+        move_lines = self.picking.move_line_ids
+        self.picking._put_in_pack(move_lines)
+        return super()._transfer_order_picking()
+
     def _product_data(self):
         data = super()._product_data()
         data.update(
@@ -88,12 +97,9 @@ class GeodisFrLabelCase(VCRMixin, carrier_label_case.TestCarrierLabel):
         )
         return data
 
-    def test_labels(self):
+    def test_labels_and_edi(self):
         res = super().test_labels()
         self.assertTrue(self.picking.geodis_shippingid)
-        return res
-
-    def test_edi(self):
         deposit = self.env["deposit.slip"].create(
             {
                 "name": "test",
@@ -101,14 +107,13 @@ class GeodisFrLabelCase(VCRMixin, carrier_label_case.TestCarrierLabel):
                 "picking_ids": [(6, 0, self.picking.ids)],
             }
         )
-        # filled on label generation / simulate it
-        self.picking.write({"geodis_shippingid": "0123456"})
         deposit.validate_deposit()
         attachment = self.env["ir.attachment"].search(
             [("res_id", "=", deposit.id), ("res_model", "=", "deposit.slip")]
         )
         self.assertEqual(len(attachment), 1)
         self.assertTrue(attachment.datas)
+        return res
 
     def test_addresses(self):
         addresses = self.picking._geodis_fr_get_address_proposition()
