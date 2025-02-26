@@ -62,14 +62,14 @@ class DeliveryCarrier(models.Model):
         if self.destination_type == "multi" and self.child_ids and not self.product_id:
             self.product_id = fields.first(self.child_ids.product_id)
 
-    def search(self, args, offset=0, limit=None, order=None, count=False):
-        """Don't show by default children carriers."""
+    def search(self, domain, offset=0, limit=None, order=None, count=False):
+        """Don't show children carriers by default."""
         if not self.env.context.get("show_children_carriers"):
-            if args is None:
-                args = []
-            args += [("parent_id", "=", False)]
-        return super(DeliveryCarrier, self).search(
-            args,
+            if domain is None:
+                domain = []
+            domain += [("parent_id", "=", False)]
+        return super().search(
+            domain,
             offset=offset,
             limit=limit,
             order=order,
@@ -78,10 +78,17 @@ class DeliveryCarrier(models.Model):
 
     @api.model
     def name_search(self, name="", args=None, operator="ilike", limit=100):
-        """Don't show by default children carriers."""
-        args = args or []
-        args += [("parent_id", "=", False)]
-        return super().name_search(name=name, args=args, operator=operator, limit=limit)
+        """Don't show children carriers by default."""
+        if not self.env.context.get("show_children_carriers"):
+            if args is None:
+                args = []
+            args += [("parent_id", "=", False)]
+        return super().name_search(
+            name=name,
+            args=args,
+            operator=operator,
+            limit=limit,
+        )
 
     def available_carriers(self, partner):
         """If the carrier is multi, we test the availability on children."""
