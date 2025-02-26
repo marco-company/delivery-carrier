@@ -103,60 +103,54 @@ class DeliveryCarrier(models.Model):
                 available |= carrier
         return available
 
-    def rate_shipment(self, order):
-        """We have to override this method for getting the proper price
-        according destination on sales orders.
-        """
-        if self.destination_type == "one":
-            return super().rate_shipment(order)
-        else:
-            carrier = self.with_context(show_children_carriers=True)
-            for subcarrier in carrier.child_ids:
-                if subcarrier._match_address(order.partner_shipping_id):
-                    return super(
-                        DeliveryCarrier,
-                        subcarrier,
-                    ).rate_shipment(order)
+    def base_on_destination_rate_shipment(self, order):
+        carrier = self.with_context(show_children_carriers=True)
+        for subcarrier in carrier.child_ids:
+            if subcarrier._match_address(order.partner_shipping_id):
+                return subcarrier.rate_shipment(order)
+        # this should normally not happen, because the delivery carrier should
+        # be filtered out before, but in case it is somehow selected anyway,
+        # at least it will fail nicely.
+        return {
+            "success": False,
+            "price": 0.0,
+            "error_message": _(
+                "Error: this delivery method is not available for this address."
+            ),
+            "warning_message": False,
+        }
 
-    def send_shipping(self, pickings):
-        """We have to override this method for redirecting the result to the
-        proper "child" carrier.
-        """
-        if self.destination_type == "one" or not self:
-            return super().send_shipping(pickings)
-        else:
-            carrier = self.with_context(show_children_carriers=True)
-            res = []
-            for p in pickings:
-                picking_res = False
-                for subcarrier in carrier.child_ids.filtered(
-                    lambda x: not x.company_id or x.company_id == p.company_id
-                ):
-                    if subcarrier.delivery_type == "fixed":
-                        if subcarrier._match_address(p.partner_id):
-                            picking_res = [
-                                {
-                                    "exact_price": subcarrier.fixed_price,
-                                    "tracking_number": False,
-                                }
-                            ]
-                            break
-                    else:
-                        try:
-                            # on base_on_rule_send_shipping, the method
-                            # _get_price_available is called using p.carrier_id,
-                            # ignoring the self arg, so we need to temporarily replace
-                            # it with the subcarrier
-                            p.carrier_id = subcarrier.id
-                            picking_res = super(
-                                DeliveryCarrier, subcarrier
-                            ).send_shipping(p)
-                            break
-                        except Exception:  # pylint: disable=except-pass
-                            pass
-                        finally:
-                            p.carrier_id = carrier
-                if not picking_res:
-                    raise ValidationError(_("There is no matching delivery rule."))
-                res += picking_res
-            return res
+    def base_on_destination_send_shipping(self, pickings):
+        carrier = self.with_context(show_children_carriers=True)
+        res = []
+        for p in pickings:
+            picking_res = False
+            for subcarrier in carrier.child_ids.filtered(
+                lambda x: not x.company_id or x.company_id == p.company_id
+            ):
+                if subcarrier.delivery_type == "fixed":
+                    if subcarrier._match_address(p.partner_id):
+                        picking_res = [
+                            {
+                                "exact_price": subcarrier.fixed_price,
+                                "tracking_number": False,
+                            }
+                        ]
+                        break
+                else:
+                    try:
+                        # on base_on_rule_send_shipping, the method
+                        # _get_price_available is called using p.carrier_id,
+                        # ignoring the self arg, so we need to temporarily replace
+                        # it with the subcarrier
+                        p.carrier_id = subcarrier.id
+                        picking_res = subcarrier.send_shipping(p)
+                        break
+                    except Exception:  # pylint: disable=except-pass
+                        pass
+                    finally:
+                        p.carrier_id = carrier
+            if not picking_res:
+                raise ValidationError(_("There is no matching delivery rule."))
+            res += picking_res
+        return res
