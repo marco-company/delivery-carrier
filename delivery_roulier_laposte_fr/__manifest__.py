@@ -11,6 +11,7 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "category": "Warehouse",
     "depends": [
+        "partner_address_split",
         "delivery_roulier_option",
         "intrastat_base",  # for customs declaration
     ],
