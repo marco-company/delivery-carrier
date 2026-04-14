@@ -17,6 +17,7 @@
     ],
     "data": [
         "data/delivery.xml",
+        "views/carrier_account_views.xml",
         "views/stock_picking.xml",
     ],
     "installable": True,
