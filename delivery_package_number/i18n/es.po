@@ -72,6 +72,7 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_dropoff_site__force_set_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_res_partner__force_set_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_res_users__force_set_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__force_set_number_of_packages
@@ -108,12 +109,12 @@ msgid "Last Updated on"
 msgstr "Última modificación en"
 
 #. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__number_of_packages
 msgid "Number Of Packages"
 msgstr "Número de Bultos"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__number_of_packages
 msgid "Number of Packages"
 msgstr "Número de Bultos"
