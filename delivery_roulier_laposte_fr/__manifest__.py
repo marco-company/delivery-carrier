@@ -11,11 +11,13 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "category": "Warehouse",
     "depends": [
+        "partner_address_split",
         "delivery_roulier_option",
         "intrastat_base",  # for customs declaration
     ],
     "data": [
         "data/delivery.xml",
+        "views/carrier_account_views.xml",
         "views/stock_picking.xml",
     ],
     "installable": True,
