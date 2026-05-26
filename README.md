@@ -1,4 +1,7 @@
 
+[![Support the OCA](https://odoo-community.org/readme-banner-image)](https://odoo-community.org/get-involved?utm_source=repo-readme)
+
+# delivery-carrier
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=16.0)
 [![Pre-commit Status](https://github.com/OCA/delivery-carrier/actions/workflows/pre-commit.yml/badge.svg?branch=16.0)](https://github.com/OCA/delivery-carrier/actions/workflows/pre-commit.yml?query=branch%3A16.0)
 [![Build Status](https://github.com/OCA/delivery-carrier/actions/workflows/test.yml/badge.svg?branch=16.0)](https://github.com/OCA/delivery-carrier/actions/workflows/test.yml?query=branch%3A16.0)
@@ -6,8 +9,6 @@
 [![Translation Status](https://translation.odoo-community.org/widgets/delivery-carrier-16-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/delivery-carrier-16-0/?utm_source=widget)
 
 <!-- /!\ do not modify above this line -->
-
-# delivery-carrier
 
 TODO: add repo description.
 
@@ -37,23 +38,24 @@ addon | version | maintainers | summary
 [delivery_carrier_partner](delivery_carrier_partner/) | 16.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_correos_express](delivery_correos_express/) | 16.0.1.0.0 |  | Delivery Carrier implementation for Correos Express using their API
 [delivery_cttexpress](delivery_cttexpress/) | 16.0.1.1.1 |  | Delivery Carrier implementation for CTT Express API
+[delivery_dachser](delivery_dachser/) | 16.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Delivery Carrier implementation for Dachser API
 [delivery_deliverea](delivery_deliverea/) | 16.0.1.1.0 |  | Delivery Carrier implementation for Deliverea using their API
 [delivery_driver](delivery_driver/) | 16.0.1.3.0 | <a href='https://github.com/EmilioPascual'><img src='https://github.com/EmilioPascual.png' width='32' height='32' style='border-radius:50%;' alt='EmilioPascual'/></a> <a href='https://github.com/rafaelbn'><img src='https://github.com/rafaelbn.png' width='32' height='32' style='border-radius:50%;' alt='rafaelbn'/></a> | Allow choose driver in delivery methods
 [delivery_driver_stock_picking_batch](delivery_driver_stock_picking_batch/) | 16.0.1.1.0 | <a href='https://github.com/EmilioPascual'><img src='https://github.com/EmilioPascual.png' width='32' height='32' style='border-radius:50%;' alt='EmilioPascual'/></a> | Add drivers from delivery in stock picking batch
 [delivery_dropoff_site](delivery_dropoff_site/) | 16.0.1.0.1 |  | Send goods to sites in which customers come pick up package
 [delivery_estimated_package_quantity_by_weight](delivery_estimated_package_quantity_by_weight/) | 16.0.1.0.0 |  | Compute the amount of packages a picking out should have depending on the weight of the products and the limit fixed by the carrier
-[delivery_multi_destination](delivery_multi_destination/) | 16.0.1.0.1 |  | Multiple destinations for the same delivery method
+[delivery_multi_destination](delivery_multi_destination/) | 16.0.2.0.0 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 16.0.1.2.0 |  | Add fees on delivered packages on shipping methods
-[delivery_package_number](delivery_package_number/) | 16.0.2.2.1 |  | Set or compute number of packages for a picking
+[delivery_package_number](delivery_package_number/) | 16.0.3.0.0 |  | Set or compute number of packages for a picking
 [delivery_package_type_number_parcels](delivery_package_type_number_parcels/) | 16.0.1.0.2 |  | Number of parcels in a package type
 [delivery_postlogistics](delivery_postlogistics/) | 16.0.1.1.0 |  | Print PostLogistics shipping labels using the Barcode web service
 [delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 16.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics
 [delivery_price_method](delivery_price_method/) | 16.0.1.1.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[delivery_purchase](delivery_purchase/) | 16.0.1.1.3 |  | Delivery costs in purchases
+[delivery_purchase](delivery_purchase/) | 16.0.1.1.4 |  | Delivery costs in purchases
 [delivery_roulier](delivery_roulier/) | 16.0.2.1.1 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> <a href='https://github.com/hparfr'><img src='https://github.com/hparfr.png' width='32' height='32' style='border-radius:50%;' alt='hparfr'/></a> | Integration of multiple carriers
 [delivery_roulier_dpd_fr](delivery_roulier_dpd_fr/) | 16.0.1.0.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Generate Labels for DPD
 [delivery_roulier_geodis_fr](delivery_roulier_geodis_fr/) | 16.0.1.1.1 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Generate Label for Geodis logistic
-[delivery_roulier_laposte_fr](delivery_roulier_laposte_fr/) | 16.0.1.0.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Generate Label for La Poste/Colissimo
+[delivery_roulier_laposte_fr](delivery_roulier_laposte_fr/) | 16.0.1.1.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Generate Label for La Poste/Colissimo
 [delivery_roulier_option](delivery_roulier_option/) | 16.0.1.0.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Add options to roulier modules
 [delivery_schenker](delivery_schenker/) | 16.0.1.0.0 |  | Delivery Carrier implementation for DB Schenker API
 [delivery_state](delivery_state/) | 16.0.1.1.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
@@ -62,7 +64,7 @@ addon | version | maintainers | summary
 [partner_delivery_zone](partner_delivery_zone/) | 16.0.1.3.0 |  | This module allows to create partner delivery zones for physical products
 [sale_order_warehouse_from_delivery_carrier](sale_order_warehouse_from_delivery_carrier/) | 16.0.1.0.0 |  | Sale Order WH from Delivery Carrier
 [server_environment_delivery](server_environment_delivery/) | 16.0.1.0.0 |  | Configure prod environment for delivery carriers
-[stock_picking_delivery_link](stock_picking_delivery_link/) | 16.0.1.1.4 |  | Adds link to the delivery on all intermediate operations.
+[stock_picking_delivery_link](stock_picking_delivery_link/) | 16.0.1.2.0 |  | Adds link to the delivery on all intermediate operations.
 [stock_picking_delivery_package_type_domain](stock_picking_delivery_package_type_domain/) | 16.0.1.0.1 |  | This module will allow to extend the domain to filter package type selection in 'Choose Delivery Package' wizard
 [stock_picking_report_delivery_cost](stock_picking_report_delivery_cost/) | 16.0.1.1.1 |  | Show delivery cost in delivery slip and picking operations reports
 
